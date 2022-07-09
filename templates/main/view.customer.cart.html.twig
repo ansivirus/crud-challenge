@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ customer.Name }}'s Cart{% endblock %}
+
+{% block body %}
+<div class="container">
+{% for message in app.flashes('notice') %}
+<div class="alert alert-success mt-4 mb-b">
+		{{ message }}
+	</div>
+{% endfor %}
+</div>
+<div class="container">
+    <h3>Customer</h3>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ customer.id }}</th>
+      <td>{{ customer.Name }}</td>
+      <td>{{ customer.Email }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="container">
+    <h3>{{ customer.Name }}'s Cart</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+{% for item in cart.Products %}
+<tr>
+    <th scope="row">{{ item.id }}</th>
+    <td>{{ item.name }}</td>
+    <td>{{ item.price }}</td>
+    <td>
+        <a class="btn btn-danger" href="{{ path('delete_from_cart',{'cartid': cart.id, 'productid':item.id, 'cid':customer.id }) }}">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+<tr>
+    <td colspan=2>Total</td>
+    <td id="ttl">{{ ttl }}</td>
+</table>
+<a class="btn btn-info mt-2 text-white" href="/">Home</button>{% endblock %}
