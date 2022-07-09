@@ -60,8 +60,6 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-/.env
-.env
 /public/bundles/
 /public/assets/
 /var/
